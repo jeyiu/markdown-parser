@@ -21,8 +21,11 @@ public class MarkdownParse {
                 int max2 = Math.max(openParen, closeParen);
                 currentIndex = Math.max(max1, max2) +1;
             }else{
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                if(openParen == closeBracket+1){
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                }
                 currentIndex = closeParen + 1;
+                
             }
             
         }
