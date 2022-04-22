@@ -26,7 +26,6 @@ public class MarkdownParse {
                 }
                 currentIndex = closeParen + 1;   
             }
-            
         }
 
         return toReturn;
@@ -37,6 +36,7 @@ public class MarkdownParse {
         Path fileName = Path.of(args[0]);
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
+        System.out.println("Before done");
 	    System.out.println(links);
     }
 }
