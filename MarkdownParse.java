@@ -16,6 +16,7 @@ public class MarkdownParse {
             int closeBracket = markdown.indexOf("]", Math.max(currentIndex, openBracket));
             int openParen = markdown.indexOf("(", Math.max(currentIndex, closeBracket));
             int closeParen = markdown.indexOf(")", Math.max(currentIndex, openParen));
+            if(openBracket == -1 && closeBracket == -1 && openParen == -1 && closeParen == -1){break;}
             if(openBracket == -1 || closeBracket == -1 || openParen == -1 || closeParen == -1){
                 int max1 = Math.max(openBracket, closeBracket);
                 int max2 = Math.max(openParen, closeParen);
