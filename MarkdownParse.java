@@ -13,9 +13,10 @@ public class MarkdownParse {
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
             int openBracket = markdown.indexOf("[", currentIndex);
-            int closeBracket = markdown.indexOf("]", openBracket);
-            int openParen = markdown.indexOf("(", closeBracket);
-            int closeParen = markdown.indexOf(")", openParen);
+            int closeBracket = markdown.indexOf("]", Math.max(currentIndex, openBracket));
+            int openParen = markdown.indexOf("(", Math.max(currentIndex, closeBracket));
+            int closeParen = markdown.indexOf(")", Math.max(currentIndex, openParen));
+            if(openBracket == -1 && closeBracket == -1 && openParen == -1 && closeParen == -1){break;}
             if(openBracket == -1 || closeBracket == -1 || openParen == -1 || closeParen == -1){
                 int max1 = Math.max(openBracket, closeBracket);
                 int max2 = Math.max(openParen, closeParen);
