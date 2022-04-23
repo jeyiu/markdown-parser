@@ -10,8 +10,6 @@ public class MarkdownParseTest {
         ArrayList<String> list = new ArrayList<String>();
         list.add("https://something.com");
         list.add("some-thing.html");
-        //Path fileName = Path.of("test-file.md");
-        //String content = Files.readString(fileName);
         assertEquals(list, MarkdownParse.getLinks("test-file.md"));
     }
     @Test
