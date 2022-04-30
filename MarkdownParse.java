@@ -22,8 +22,10 @@ public class MarkdownParse {
                 int max2 = Math.max(openParen, closeParen);
                 currentIndex = Math.max(max1, max2) +1;
             }else{
+                String s = markdown.substring(openParen+1, closeParen);
+                if(s.contains("(") || s.contains("[")){break;}
                 if(openParen == closeBracket + 1){
-                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                    toReturn.add(s);
                 }
                 currentIndex = closeParen + 1;   
             }
