@@ -24,8 +24,14 @@ public class MarkdownParse {
             }else{
                 String s = markdown.substring(openParen+1, closeParen);
                 if(!(s.contains("(") || s.contains("["))){
-                    if(openParen == closeBracket + 1 && markdown.charAt(openBracket-1) != '!'){
-                        toReturn.add(s);
+                    if(openParen == closeBracket + 1){
+                        try{
+                            if(markdown.charAt(openBracket-1) != '!'){
+                                toReturn.add(s);
+                            }
+                        }catch(IndexOutOfBoundsException e){
+                            toReturn.add(s);
+                        }
                     }
                 }
                 currentIndex = closeParen + 1;   
