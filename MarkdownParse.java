@@ -1,9 +1,13 @@
-//https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
+import org.commonmark.node.*;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
+import java.util.ArrayList;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 public class MarkdownParse {
 
@@ -43,9 +47,21 @@ public class MarkdownParse {
 
 
     public static void main(String[] args) throws IOException {
+        Parser parser = Parser.builder().build();
         Path fileName = Path.of(args[0]);
         String content = Files.readString(fileName);
-        ArrayList<String> links = getLinks(content);
-	    System.out.println(links);
+        Node document = parser.parse(content);
+        LinkVisitor visitor = new LinkVisitor();
+        document.accept(visitor);
+        System.out.println(visitor.links);
+    }
+}
+
+class LinkVisitor extends AbstractVisitor {
+    public ArrayList<String> links = new ArrayList<String>();
+    @Override
+    public void visit(Link text){
+        links.add(text.getDestination());
+        visitChildren(text);
     }
 }
